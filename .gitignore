@@ -1,0 +1,5 @@
+bin/
+obj/
+Properties/PublishProfiles/
+.vs/
+RowlingApp.csproj.user
