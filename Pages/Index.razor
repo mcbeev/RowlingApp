@@ -1,146 +1,31 @@
 ﻿@page "/"
+@inject TeamService TeamService
 
-<div class="jumbotron">
-  <h1>Rowling for the Steele's</h1>
-  <p>Hosted by <a href="http://www.crossfitallendale.com/" target="_blank">Crossfit Allendale.</a> Athletes row with the goal of hitting 100 meters. However many meters over or under 100 is their score for the frame. Each person rows 10 frames. Lowest score wins.</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Donate to #DebStrong</a></p>
-</div>
-
-<div class="card-group">
-  <div class="card">
-    <img class="card-img-top" src="https://lh5.googleusercontent.com/p/AF1QipMbWr9RF0xmRNKFC3XfHQFRUqaK7GPOnSwjv1g6=w250-h160-k-no" alt="Card image cap" />
-    <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Hearts of Steele</h4>
-    </div>    
-    <div class="card-body">
-      <h1 class="card-title">20 <small class="text-muted">/ 6 frames to go</small></h1>
-        <p>
-            <a href="#" class="btn btn-primary" role="button">up</a>
-            <a href="#" class="btn btn-default" role="button">down</a>
-            <a href="#" class="btn btn-link" role="button">reset</a>
-        </p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-
-  <div class="card">
-    <img class="card-img-top" src="https://www.bizstream.com/getmedia/3cfe7c44-2cbd-4263-8834-5213972a7f8e/crossfit?width=250&height=160" alt="Card image cap" />
-    <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Cinnamon Rowls</h4>
-    </div>
-    <div class="card-body">
-      <h1 class="card-title">3 <small class="text-muted">/ 7 frames to go</small></h1>
-        <p>
-            <a href="#" class="btn btn-primary" role="button">up</a>
-            <a href="#" class="btn btn-default" role="button">down</a>
-            <a href="#" class="btn btn-link" role="button">reset</a>
-        </p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-
-  <div class="card">
-    <img class="card-img-top" src="https://www.bizstream.com/getmedia/41c7dbff-5066-4ac1-912d-2b39bd699d92/image1-1.aspx?width=250&height=160" alt="Card image cap" />
-    <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Strong as Steele</h4>
-    </div>        
-    <div class="card-body">
-      <h1 class="card-title">9 <small class="text-muted">/ 5 frames to go</small></h1>
-        <p>
-            <a href="#" class="btn btn-primary" role="button">up</a>
-            <a href="#" class="btn btn-default" role="button">down</a>
-            <a href="#" class="btn btn-link" role="button">reset</a>
-        </p>
-
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-
-    <div class="card">
-        <img class="card-img-top" src="https://lh5.googleusercontent.com/p/AF1QipMbWr9RF0xmRNKFC3XfHQFRUqaK7GPOnSwjv1g6=w250-h160-k-no" alt="Card image cap" />
-        <div class="card-header">
-            <h4 class="my-0 font-weight-normal">SS Rock and Row</h4>
-        </div>        
-        <div class="card-body">
-        <h1 class="card-title">14 <small class="text-muted">/ 6 frames to go</small></h1>
-            <p>
-                <a href="#" class="btn btn-primary" role="button">up</a>
-                <a href="#" class="btn btn-default" role="button">down</a>
-                <a href="#" class="btn btn-link" role="button">reset</a>
-            </p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div>   
-
-</div>
-
-<div class="card-group">
-  <div class="card">
-    <img class="card-img-top" src="https://www.bizstream.com/getmedia/41c7dbff-5066-4ac1-912d-2b39bd699d92/image1-1.aspx?width=250&height=160" alt="Card image cap" />
-    <div class="card-header">
-        <h4 class="my-0 font-weight-normal">BizStream 1</h4>
-    </div>        
-    <div class="card-body">
-      <h1 class="card-title">14 <small class="text-muted">/ 2 frames to go</small></h1>
-        <p>
-            <a href="#" class="btn btn-primary" role="button">up</a>
-            <a href="#" class="btn btn-default" role="button">down</a>
-            <a href="#" class="btn btn-link" role="button">reset</a>
-        </p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
+    <div class="jumbotron" style="display:@jumboDisplay">
+        <h1>Rowling for the Steele's<button class='btn btn-link pull-right' @onclick="@RemoveJumbo">x</button></h1>
+        <p>Hosted by <a href="http://www.crossfitallendale.com/" target="_blank">Crossfit Allendale.</a> Athletes row with the goal of hitting 100 meters. However many meters over or under 100 is their score for the frame. Each person rows 10 frames. Lowest score wins.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Donate to #DebStrong</a></p>
     </div>
 
-
-    <div class="card">
-        <img class="card-img-top" src="https://lh5.googleusercontent.com/p/AF1QipMbWr9RF0xmRNKFC3XfHQFRUqaK7GPOnSwjv1g6=w250-h160-k-no" alt="Card image cap" />
-        <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Team OFSG</h4>
-        </div>        
-        <div class="card-body">
-        <h1 class="card-title">14 <small class="text-muted">/ 3 frames to go</small></h1>
-            <p>
-                <a href="#" class="btn btn-primary" role="button">up</a>
-                <a href="#" class="btn btn-default" role="button">down</a>
-                <a href="#" class="btn btn-link" role="button">reset</a>
-            </p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div>    
-    
-     <div class="card">
-    <img class="card-img-top" src="https://www.bizstream.com/getmedia/41c7dbff-5066-4ac1-912d-2b39bd699d92/image1-1.aspx?width=250&height=160" alt="Card image cap" />
-    <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Other Team</h4>
-    </div>        
-    <div class="card-body">
-      <h1 class="card-title">14 <small class="text-muted">/ 9 frames to go</small></h1>
-        <p>
-            <a href="#" class="btn btn-primary" role="button">up</a>
-            <a href="#" class="btn btn-default" role="button">down</a>
-            <a href="#" class="btn btn-link" role="button">reset</a>
-        </p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-    </div>
-
-
-    <div class="card">
-        <img class="card-img-top" src="https://www.bizstream.com/getmedia/b82838d6-8d4d-4a8d-a20e-f79084a0f037/XfitAllendale250" alt="Card image cap" />
-        <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Team Dog Lovers</h4>
-        </div>        
-        <div class="card-body">
-        <h1 class="card-title">14 <small class="text-muted">/ 7 frames to go</small></h1>
-            <p>
-                <a href="#" class="btn btn-primary" role="button">up</a>
-                <a href="#" class="btn btn-default" role="button">down</a>
-                <a href="#" class="btn btn-link" role="button">reset</a>
-            </p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div> 
-
-  </div>  
-
-
+<div class="card-columns">
+    @if (Teams != null)
+    {
+        @foreach (var team in Teams)
+        {
+            <div class="card" id="team-@team.PageUrl">
+                <img class="card-img-top" src="@team.TeamLogo" alt="@team.TeamName logo" />
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">@team.TeamName</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title"><span id="team-@team.PageUrl-current-score">@team.TeamScore</span> <small class="text-muted">/ <span class="team-current-frames-left">@team.TeamFramesLeft</span> frames to go</small></h1>
+                    <p><a href="#" data-team-id="@team.PageUrl" class="btn btn-primary btn-block" role="button" @onclick="@(() => IncrementScore(team.PageUrl))"><span class="oi oi-plus"></span>  Add Score</a></p>
+                    <p><a href="#" class="btn btn-outline-secondary" role="button" @onclick="@(() => IncrementFrames(team.PageUrl))"><span class="oi oi-arrow-circle-right"></span>  Next Frame</a>
+                    <a href="#" class="btn btn-link" role="button" @onclick="@(() => ResetTeam(team.PageUrl))"><span class="oi oi-power-standby"></span>  Reset</a></p>
+                    
+                    <p class="card-text"><small class="text-muted">Last updated <span class="team-score-last-updated">3 mins</span> ago</small></p>
+                </div>
+            </div>
+        }
+    }
+</div>  
