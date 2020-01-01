@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using RowlingApp.Data;
 using RowlingApp.Services;
 using Kentico.Kontent.Delivery;
-using RowlingApp.Models;
+using RowlingApp.Models.Generated;
 
 namespace RowlingApp
 {

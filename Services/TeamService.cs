@@ -17,10 +17,27 @@ namespace RowlingApp.Services
             _deliveryService = deliveryService;
         }
 
-        public async Task<IReadOnlyList<Team>> GetAllTeamsAsync()
+        public async Task<List<Team>> GetAllTeamsAsync()
         {
-            var data = await _deliveryService.GetDeliveryClient().GetItemsAsync<Team>();
-            return data.Items;
+            List<Team> teams = new List<Team>();
+
+            var data = await _deliveryService.GetDeliveryClient().GetItemsAsync<RowlingApp.Models.Generated.Team>();
+            
+            foreach(var t in data.Items)
+            {
+                Team team = new Team()
+                {
+                    TeamName = t.TeamName,
+                    TeamCaptian = t.TeamCaptian,
+                    TeamLogo = t.TeamLogo.First().Url,
+                    TeamMembers = t.TeamMembers,
+                    PageUrl = t.PageUrl,
+                    TeamScore = 0,
+                    TeamFramesLeft = 10
+                };
+                teams.Add(team);
+            }
+            return teams;
         }
 
         public async Task<Team> GetTeamByNameAsync(string TeamName)

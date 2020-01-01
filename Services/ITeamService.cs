@@ -9,7 +9,7 @@ namespace RowlingApp.Services
 {
     public interface ITeamService
     {
-        Task<IReadOnlyList<Team>> GetAllTeamsAsync();
+        Task<List<Team>> GetAllTeamsAsync();
 
         Task<Team> GetTeamByNameAsync(string TeamName);
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Kentico.Kontent.Delivery;
 
-namespace RowlingApp.Models
+namespace RowlingApp.Models.Generated
 {
     public class TeamMember
     {
