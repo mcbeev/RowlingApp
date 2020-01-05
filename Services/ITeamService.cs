@@ -1,9 +1,6 @@
-﻿using System;
+﻿using RowlingApp.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Kentico.Kontent.Delivery;
-using RowlingApp.Models;
 
 namespace RowlingApp.Services
 {
@@ -12,5 +9,7 @@ namespace RowlingApp.Services
         Task<List<Team>> GetAllTeamsAsync();
 
         Task<Team> GetTeamByNameAsync(string TeamName);
+
+        Task<bool> UpdateTeamAsync(Team TeamToUpdate);
     }
 }

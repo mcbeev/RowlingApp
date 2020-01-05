@@ -15,5 +15,8 @@ namespace RowlingApp.Models
         public string PageUrl { get; set; }
         public int TeamScore { get; set; }
         public int TeamFramesLeft { get; set; }
+
+        public string Id { get; set; }
+        public string CodeName { get; set; }
     }
 }

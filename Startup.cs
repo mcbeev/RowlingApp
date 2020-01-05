@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Kentico.Kontent.Delivery;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RowlingApp.Data;
-using RowlingApp.Services;
-using Kentico.Kontent.Delivery;
 using RowlingApp.Models.Generated;
+using RowlingApp.Services;
 
 namespace RowlingApp
 {
@@ -29,13 +23,13 @@ namespace RowlingApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddHttpClient();
-
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ITypeProvider, CustomTypeProvider>();
             services.AddHttpClient<KontentDeliveryService>();
+            services.AddHttpClient<KontentManagementBetaService>();
+            services.AddSingleton<KontentManagementService>();
             services.AddSingleton<TeamService>();
         }
 

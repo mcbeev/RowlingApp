@@ -12,16 +12,16 @@
     {
         @foreach (var team in Teams)
         {
-            <div class="card" id="team-@team.PageUrl">
+            <div class="card">
                 <img class="card-img-top" src="@team.TeamLogo" alt="@team.TeamName logo" />
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">@team.TeamName</h4>
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title"><span id="team-@team.PageUrl-current-score">@team.TeamScore</span> <small class="text-muted">/ <span class="team-current-frames-left">@team.TeamFramesLeft</span> frames to go</small></h1>
-                    <p><a href="#" data-team-id="@team.PageUrl" class="btn btn-primary btn-block" role="button" @onclick="@(() => IncrementScore(team.PageUrl))"><span class="oi oi-plus"></span>  Add Score</a></p>
-                    <p><a href="#" class="btn btn-outline-secondary" role="button" @onclick="@(() => IncrementFrames(team.PageUrl))"><span class="oi oi-arrow-circle-right"></span>  Next Frame</a>
-                    <a href="#" class="btn btn-link" role="button" @onclick="@(() => ResetTeam(team.PageUrl))"><span class="oi oi-power-standby"></span>  Reset</a></p>
+                    <h1 class="card-title"><span>@team.TeamScore</span> <small class="text-muted">/ <span class="team-current-frames-left">@team.TeamFramesLeft</span> frames to go</small></h1>
+                    <p><button data-team-id="@team.PageUrl" class="btn btn-primary btn-block" role="button" @onclick="@(() => IncrementScore(team.PageUrl))" disabled="@IsDisabled"><span class="oi oi-plus"></span>  Add Score</button></p>
+                    <p><button href="#" class="btn btn-outline-secondary" role="button" @onclick="@(() => IncrementFrames(team.PageUrl))" disabled="@IsDisabled"><span class="oi oi-arrow-circle-right"></span>  Next Frame</button>
+                    <button href="#" class="btn btn-link" role="button" @onclick="@(() => ResetTeam(team.PageUrl))" disabled="@IsDisabled"><span class="oi oi-power-standby"></span>  Reset</button></p>
                     
                     <p class="card-text"><small class="text-muted">Last updated <span class="team-score-last-updated">3 mins</span> ago</small></p>
                 </div>
