@@ -28,6 +28,5 @@ namespace RowlingApp.Services
 
             return _deliveryClient;
         }
-        
     }
 }

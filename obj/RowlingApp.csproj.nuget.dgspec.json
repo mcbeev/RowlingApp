@@ -45,6 +45,10 @@
               "target": "Package",
               "version": "[12.3.0, )"
             },
+            "Kentico.Kontent.Management": {
+              "target": "Package",
+              "version": "[2.0.2, )"
+            },
             "Microsoft.AspNetCore.Blazor.HttpClient": {
               "target": "Package",
               "version": "[3.1.0-preview4.19579.2, )"

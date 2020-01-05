@@ -1,36 +1,50 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using RowlingApp.Models;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
-using Microsoft.JSInterop;
+using System.Threading.Tasks;
 
 namespace RowlingApp.Pages
 {
     public partial class Index : ComponentBase
     {
         private List<Team> Teams;
+        protected string jumboDisplay { get; set; }
+        protected bool IsDisabled { get; set; }
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
-        private string jumboDisplay = "block";
-
         protected override async Task OnInitializedAsync()
         {
             Teams = await TeamService.GetAllTeamsAsync();
+            IsDisabled = false;
         }
 
-        private void IncrementScore(string TeamSlug)
+        private async void IncrementScore(string TeamSlug)
         {
+            //Disable the button action to prevent button spamming
+            IsDisabled = true;
+            StateHasChanged();
+
+            //Increment team score
             Team t = Teams.First(x => x.PageUrl == TeamSlug);
             t.TeamScore++;
-            
-            //JSRuntime.InvokeAsync<object>("rowling.updateTeamScore", TeamSlug, t.TeamScore++);
+
+            //Save state
+            await TeamService.UpdateTeamAsync(t);
+
+            //Re-enable the button
+            IsDisabled = false;
+            StateHasChanged();
         }
 
-        private void IncrementFrames(string TeamSlug)
+        private async Task IncrementFrames(string TeamSlug)
         {
+            IsDisabled = true;
+            StateHasChanged();
+
             Team t = Teams.First(x => x.PageUrl == TeamSlug);
             t.TeamFramesLeft--;
             if(t.TeamFramesLeft < 0)
@@ -38,17 +52,28 @@ namespace RowlingApp.Pages
                 t.TeamFramesLeft = 0;
             }
 
-            //JSRuntime.InvokeAsync<object>("rowling.updateTeamFrames", TeamSlug, t.TeamFramesLeft);
+            await TeamService.UpdateTeamAsync(t);
+
+            IsDisabled = false;
+            StateHasChanged();
         }
 
-        private void ResetTeam(string TeamSlug)
+        private async void ResetTeam(string TeamSlug)
         {
+            IsDisabled = true;
+            StateHasChanged();
+
             Team t = Teams.First(x => x.PageUrl == TeamSlug);
-            t.TeamFramesLeft = 10;
+            t.TeamFramesLeft = RowlingApp.Constants.RowlingAppConstants.DefaultFramesLeft;
             t.TeamScore = 0;
+
+            await TeamService.UpdateTeamAsync(t);
+
+            IsDisabled = false;
+            StateHasChanged();
         }
 
-        private void RemoveJumbo()
+        protected void RemoveJumbo()
         {
             jumboDisplay = "none";
         }
