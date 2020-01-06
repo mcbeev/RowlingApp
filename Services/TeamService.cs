@@ -36,11 +36,11 @@ namespace RowlingApp.Services
             return teams;
         }
 
-        public async Task<Team> GetTeamByNameAsync(string TeamName)
+        public async Task<Team> GetTeamByCodeNameAsync(string TeamCodeName)
         {
-            var data = await _deliveryService.GetDeliveryClient().GetItemsAsync<Models.Generated.Team>();
+            var data = await _deliveryService.GetDeliveryClient().GetItemAsync<Models.Generated.Team>(TeamCodeName);
 
-            return MapTeam(data.Items.FirstOrDefault());
+            return MapTeam(data.Item);
         }
 
         public async Task<bool> UpdateTeamAsync(Team TeamToUpdate)

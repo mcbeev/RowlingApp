@@ -1,31 +1,24 @@
 ﻿@page "/"
 @inject TeamService TeamService
 
-    <div class="jumbotron" style="display:@jumboDisplay">
-        <h1>Rowling for the Steele's<button class='btn btn-link pull-right' @onclick="@RemoveJumbo">x</button></h1>
-        <p>Hosted by <a href="http://www.crossfitallendale.com/" target="_blank">Crossfit Allendale.</a> Athletes row with the goal of hitting 100 meters. However many meters over or under 100 is their score for the frame. Each person rows 10 frames. Lowest score wins.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Donate to #DebStrong</a></p>
-    </div>
+<div class="jumbotron" style="display:@jumboDisplay">
+    <h1>Rowling for the Steele's<button class='btn btn-link pull-right' @onclick="@RemoveJumbo">x</button></h1>
+    <p>Hosted by <a href="http://www.crossfitallendale.com/" target="_blank">Crossfit Allendale.</a> Athletes row with the goal of hitting 100 meters. However many meters over or under 100 is their score for the frame. Each person rows 10 frames. Lowest score wins.</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Donate to #DebStrong</a></p>
+</div>
 
-<div class="card-columns">
-    @if (Teams != null)
-    {
-        @foreach (var team in Teams)
+<div class="leaderboard">
+    <h2>Leaderboard</h2>
+    <ol>
+        @if (Teams != null)
         {
-            <div class="card">
-                <img class="card-img-top" src="@team.TeamLogo" alt="@team.TeamName logo" />
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">@team.TeamName</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title"><span>@team.TeamScore</span> <small class="text-muted">/ <span class="team-current-frames-left">@team.TeamFramesLeft</span> frames to go</small></h1>
-                    <p><button data-team-id="@team.PageUrl" class="btn btn-primary btn-block" role="button" @onclick="@(() => IncrementScore(team.PageUrl))" disabled="@IsDisabled"><span class="oi oi-plus"></span>  Add Score</button></p>
-                    <p><button href="#" class="btn btn-outline-secondary" role="button" @onclick="@(() => IncrementFrames(team.PageUrl))" disabled="@IsDisabled"><span class="oi oi-arrow-circle-right"></span>  Next Frame</button>
-                    <button href="#" class="btn btn-link" role="button" @onclick="@(() => ResetTeam(team.PageUrl))" disabled="@IsDisabled"><span class="oi oi-power-standby"></span>  Reset</button></p>
-                    
-                    <p class="card-text"><small class="text-muted">Last updated <span class="team-score-last-updated">3 mins</span> ago</small></p>
-                </div>
-            </div>
+            @foreach (var team in Teams.OrderBy(x => x.TeamScore).ThenBy(y => y.TeamFramesLeft))
+            {
+                <li>
+                    <h3><a href="/teams/@team.CodeName">@team.TeamName</a>: @team.TeamScore</h3> 
+                    <mark>[@team.TeamFramesLeft frames left]</mark>
+                </li>
+            }
         }
-    }
-</div>  
+    </ol>
+</div>

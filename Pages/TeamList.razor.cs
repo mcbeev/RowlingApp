@@ -3,12 +3,12 @@ using Microsoft.JSInterop;
 using RowlingApp.Models;
 using RowlingApp.Services;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace RowlingApp.Pages
 {
-    public partial class Index : ComponentBase
+    public partial class TeamList : ComponentBase
     {
         private List<Team> Teams;
         protected string jumboDisplay { get; set; }
@@ -18,12 +18,8 @@ namespace RowlingApp.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Teams = await TeamService.GetAllTeamsAsync();    
-        }
-
-        protected void RemoveJumbo()
-        {
-            jumboDisplay = "none";
+            Teams = await TeamService.GetAllTeamsAsync();
+            Teams = Teams.OrderBy(t => t.TeamName).ToList();
         }
     }
 }
