@@ -1,0 +1,12 @@
+﻿@page "/team-list"
+@inject TeamService TeamService
+
+<div class="card-columns">
+    @if (Teams != null)
+    {
+        @foreach (var team in Teams)
+        {
+            <TeamCard Team="@team" ReadOnly="true" />
+        }
+    }
+</div>  

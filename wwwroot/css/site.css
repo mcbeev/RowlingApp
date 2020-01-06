@@ -141,6 +141,22 @@ app {
     top: 0.5rem;
 }
 
+.leaderboard ol li {
+    margin-bottom:10px;
+}
+
+.leaderboard ol li:nth-child(1) {
+    background: gold;
+}
+
+.leaderboard ol li:nth-child(2) {
+    background: #c0c0c0;
+}
+
+.leaderboard ol li:nth-child(3) {
+    background: #cd7f32;
+}
+
 @media (max-width: 767.98px) {
     .main .top-row:not(.auth) {
         display: none;

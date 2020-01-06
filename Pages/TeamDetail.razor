@@ -1,0 +1,10 @@
+﻿@page "/teams/{TeamSlug}"
+
+<div class="card-columns">
+    <TeamCard TeamClodeName="@TeamSlug"></TeamCard>
+</div>
+
+@code {
+    [Parameter]
+    public string TeamSlug { get; set; }
+}

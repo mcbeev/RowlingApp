@@ -8,7 +8,7 @@ namespace RowlingApp.Services
     {
         Task<List<Team>> GetAllTeamsAsync();
 
-        Task<Team> GetTeamByNameAsync(string TeamName);
+        Task<Team> GetTeamByCodeNameAsync(string TeamCodeName);
 
         Task<bool> UpdateTeamAsync(Team TeamToUpdate);
     }
