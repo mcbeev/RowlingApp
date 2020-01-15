@@ -4,23 +4,22 @@
 }
 else 
 {
-    <div class="card">
-        <img class="card-img-top" src="@Team.TeamLogo" alt="@Team.TeamName logo" />
-        <div class="card-header">
-            <h4 class="my-0 font-weight-normal"><a href="/teams/@Team.CodeName">@Team.TeamName</a></h4>
-        </div>
-        <div class="card-body">
-            <h1 class="card-title"><span>@Team.TeamScore</span> <small class="text-muted">/ <span class="team-current-frames-left">@Team.TeamFramesLeft</span> frames to go</small></h1>
+    <div class="team-item">
+        <a href="/teams/@Team.CodeName">
+            <h2 class="font-weight-normal">@Team.TeamName</h2>
+            <img class="card-img" src="@Team.TeamLogo" alt="@Team.TeamName logo" />
+            <h3 class="card-title">Current Score: @Team.TeamScore</h3>
+            <span class="team-current-frames-left">Current Frame: @Team.TeamFramesLeft</span> 
 
             @if (!ReadOnly)
             {
-            <p><button class="btn btn-primary btn-block" role="button" @onclick="@(() => IncrementScore())" disabled="@IsDisabled"><span class="oi oi-plus"></span>  Add Score</button></p>
-            <p>
-                <button class="btn btn-outline-secondary" role="button" @onclick="@(() => IncrementFrames())" disabled="@IsDisabled"><span class="oi oi-arrow-circle-right"></span>  Next Frame</button>
+            <div class="cta">   
+                <button class="btn btn-primary" role="button" @onclick="@(() => IncrementScore())" disabled="@IsDisabled"><span class="oi oi-plus"></span>  Add to Current Score</button>
+                <button class="btn btn-secondary" role="button" @onclick="@(() => IncrementFrames())" disabled="@IsDisabled"><span class="oi oi-arrow-circle-right"></span>  Go to Next Frame</button>
                 <button class="btn btn-link" role="button" @onclick="@(() => ResetTeam())" disabled="@IsDisabled"><span class="oi oi-power-standby"></span>  Reset</button>
-            </p>
+            </div>
             }
             <p class="card-text"><small class="text-muted">Last updated <span class="team-score-last-updated">3 mins</span> ago</small></p>
-        </div>
+        </a>
     </div>
 }

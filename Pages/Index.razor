@@ -1,24 +1,34 @@
 ﻿@page "/"
 @inject TeamService TeamService
 
-<div class="jumbotron" style="display:@jumboDisplay">
-    <h1>Rowling for the Steele's<button class='btn btn-link pull-right' @onclick="@RemoveJumbo">x</button></h1>
-    <p>Hosted by <a href="http://www.crossfitallendale.com/" target="_blank">Crossfit Allendale.</a> Athletes row with the goal of hitting 100 meters. However many meters over or under 100 is their score for the frame. Each person rows 10 frames. Lowest score wins.</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Donate to #DebStrong</a></p>
-</div>
 
 <div class="leaderboard">
-    <h2>Leaderboard</h2>
-    <ol>
-        @if (Teams != null)
-        {
-            @foreach (var team in Teams.OrderBy(x => x.TeamScore).ThenBy(y => y.TeamFramesLeft))
+    <div class="jumbotron" style="display:@jumboDisplay">
+        <h1>Rowling for the Steele's<button class='btn btn-link pull-right' @onclick="@RemoveJumbo">x</button></h1>
+        <p>Hosted by <a href="http://www.crossfitallendale.com/" target="_blank">Crossfit Allendale.</a> Athletes row with the goal of hitting 100 meters. However many meters over or under 100 is their score for the frame. Each person rows 10 frames. Lowest score wins.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Donate to #DebStrong</a></p>
+    </div>
+
+    <div>
+        <h2>Leaderboard</h2>
+        <ol>
+            @if (Teams != null)
             {
-                <li>
-                    <h3><a href="/teams/@team.CodeName">@team.TeamName</a>: @team.TeamScore</h3> 
-                    <mark>[@team.TeamFramesLeft frames left]</mark>
-                </li>
+                @foreach (var team in Teams.OrderBy(x => x.TeamScore).ThenBy(y => y.TeamFramesLeft))
+                {
+                    <li>
+                        <div class="inner-content">
+                            <a href="/teams/@team.CodeName">
+                                <h3>@team.TeamName</h3> 
+                                <div class="sub-content">                    
+                                    <p>Score: @team.TeamScore</p>
+                                    @team.TeamFramesLeft frames left
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                }
             }
-        }
-    </ol>
+        </ol>
+    </div>
 </div>
