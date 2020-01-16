@@ -167,12 +167,19 @@ app {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  padding: 5px;
 }
 
 .team-item {
-  width: 33%;
+  width: 100%;
   text-align: center;
   margin: 15px 0;
+}
+
+@media (min-width: 1200px) {
+  .team-item {
+    width: 33%;
+  }
 }
 
 .team-item h2 {
@@ -192,14 +199,27 @@ app {
 
 .team-item .cta button {
   margin: 5px 0;
-  padding: 10px;
+  padding: 30px;
   display: flex;
+  font-size: 22px;
   align-items: center;
   justify-content: center;
 }
 
+@media (min-width: 768px) {
+  .team-item .cta button {
+    padding: 10px;
+  }
+}
+
 .team-item .cta button span {
-  margin-right: 5px;
+  margin-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .team-item .cta button span {
+    margin-right: 5px;
+  }
 }
 
 .card-title {
@@ -208,6 +228,7 @@ app {
 
 .card-img { 
   max-width: 400px;
+  margin-bottom: 10px;
 }
 
 #blazor-error-ui {
@@ -347,7 +368,7 @@ app {
 
 .jumbotron {
   background-color: #c7d2d8;
-  padding: 20px;
+  padding: 24px;
   position: relative;
   margin: 30px 15px 0 15px;
 }
