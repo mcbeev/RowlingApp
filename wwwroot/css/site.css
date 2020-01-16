@@ -173,22 +173,22 @@ app {
 .team-item {
   width: 100%;
   text-align: center;
-  margin: 15px 0;
+  margin: 15px;
 }
 
 @media (min-width: 1200px) {
   .team-item {
-    width: 33%;
+    width: 30%;
   }
 }
 
 .team-item h2 {
-  font-size: 40px;
+  font-size: 39px;
 }
 
 .team-item h3 {
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .team-item .cta {
@@ -229,6 +229,10 @@ app {
 .card-img { 
   max-width: 400px;
   margin-bottom: 10px;
+}
+
+.card-img.placeholder {
+    max-width: 200px;
 }
 
 #blazor-error-ui {
