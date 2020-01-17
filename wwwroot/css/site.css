@@ -86,12 +86,31 @@ app {
 }
 
 .sidebar .top-row {
+  display: none;
   background-color: #40525b;
   padding: 20px;
 }
 
 .sidebar .navbar-brand {
   font-size: 1.1rem;
+}
+
+.sidebar .navbar-dark {
+  background-color: #40525b;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.sidebar .navbar-dark .navbar-toggler {
+  position: absolute;
+  left: 15px;
+}
+
+.sidebar .navbar-dark h1 {
+  color: #e5e5e5;
+  font-size: 20px;
+  margin: 0;
 }
 
 .sidebar .oi {
@@ -419,12 +438,13 @@ app {
   }
 
   .sidebar .top-row {
+    display: block;
     width: 100%;
     z-index: 2;
   }
 
-  .navbar-toggler {
-    display: none;
+  .navbar-toggler, .sidebar .navbar-dark {
+    display: none ;
   }
 
   .sidebar .collapse {
