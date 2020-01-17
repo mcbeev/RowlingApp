@@ -7,11 +7,12 @@ else
     <div class="team-item">
         <a href="/teams/@Team.CodeName">
             <h2 class="font-weight-normal">@Team.TeamName</h2>
+            <img class="card-img" src="@Team.TeamLogo" alt="@Team.TeamName logo" />
             @if (!ReadOnly)
             {
-                <img class="card-img" src="@Team.TeamLogo" alt="@Team.TeamName logo" />
+                
                 <h3 class="card-title">Current Score: @Team.TeamScore</h3>
-                <span class="team-current-frames-left">Current Frame: @Team.TeamFramesLeft</span>
+                <span class="team-current-frames-left">Frames left: @Team.TeamFramesLeft</span>
             <div class="cta">   
                 <button class="btn btn-primary" role="button" @onclick="@(() => IncrementScore())" disabled="@IsDisabled"><span class="oi oi-plus"></span>  Add to Current Score</button>
                 <button class="btn btn-secondary" role="button" @onclick="@(() => IncrementFrames())" disabled="@IsDisabled"><span class="oi oi-arrow-circle-right"></span>  Go to Next Frame</button>

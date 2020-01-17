@@ -23,6 +23,15 @@ namespace RowlingApp.Components
 
         protected override async Task OnInitializedAsync()
         {
+            TeamService.OnChange += StateHasChanged;
+
+            //ask memory object if we have it
+            if (Team == null)
+            {
+                Team = TeamService.GetTeamByCodeName(TeamClodeName);
+            }
+
+            //ask Kontent if we still don't have it
             if (Team == null)
             {
                 Team = await TeamService.GetTeamByCodeNameAsync(TeamClodeName);

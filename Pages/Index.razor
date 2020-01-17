@@ -1,12 +1,9 @@
 ﻿@page "/"
-@inject TeamService TeamService
-
 
 <div class="leaderboard">
     <div class="jumbotron" style="display:@jumboDisplay">
         <h1>Rowling for the Steele's<button class='btn btn-link pull-right' @onclick="@RemoveJumbo">x</button></h1>
         <p>Hosted by <a href="http://www.crossfitallendale.com/" target="_blank">Crossfit Allendale.</a> Athletes row with the goal of hitting 100 meters. However many meters over or under 100 is their score for the frame. Each person rows 10 frames. Lowest score wins.</p>
-        @* <p><a class="btn btn-primary btn-lg" href="#" role="button">Donate to #DebStrong</a></p> *@
     </div>
 
     <div>
@@ -16,17 +13,7 @@
             {
                 @foreach (var team in Teams.OrderBy(x => x.TeamScore).ThenBy(y => y.TeamFramesLeft))
                 {
-                    <li>
-                        <div class="inner-content">
-                            <a href="/teams/@team.CodeName">
-                                <h3>@team.TeamName</h3> 
-                                <div class="sub-content">                    
-                                    <p>Score: @team.TeamScore</p>
-                                    @team.TeamFramesLeft frames left
-                                </div>
-                            </a>
-                        </div>
-                    </li>
+                    <TeamScoreBoardItem Team="@team" />
                 }
             }
         </ol>
