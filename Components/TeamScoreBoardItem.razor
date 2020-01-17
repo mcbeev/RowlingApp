@@ -1,0 +1,18 @@
+﻿@if (Team == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <li>
+        <div class="inner-content">
+            <a href="/teams/@Team.CodeName">
+                <h3>@Team.TeamName</h3>
+                <div class="sub-content">
+                    <p>Score: @Team.TeamScore</p>
+                    @Team.TeamFramesLeft frames left
+                </div>
+            </a>
+        </div>
+    </li>
+}

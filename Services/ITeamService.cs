@@ -10,6 +10,8 @@ namespace RowlingApp.Services
 
         Task<Team> GetTeamByCodeNameAsync(string TeamCodeName);
 
+        Team GetTeamByCodeName(string TeamCodeName);
+
         Task<bool> UpdateTeamAsync(Team TeamToUpdate);
     }
 }

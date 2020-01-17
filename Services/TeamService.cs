@@ -15,6 +15,10 @@ namespace RowlingApp.Services
         private KontentManagementService _managementService;
         private KontentManagementBetaService _managementBetaService;
 
+        private List<Team> _allTeams;
+
+        public event Action OnChange;
+
         public TeamService(KontentDeliveryService deliveryService, KontentManagementService managementService, KontentManagementBetaService managementBetaService)
         {
             _deliveryService = deliveryService;
@@ -24,16 +28,18 @@ namespace RowlingApp.Services
 
         public async Task<List<Team>> GetAllTeamsAsync()
         {
-            List<Team> teams = new List<Team>();
-
-            var data = await _deliveryService.GetDeliveryClient().GetItemsAsync<Models.Generated.Team>();
-
-            foreach (var t in data.Items)
+            if (_allTeams == null)
             {
-                Team team = MapTeam(t);
-                teams.Add(team);
+                _allTeams = new List<Team>();
+
+                var data = await _deliveryService.GetDeliveryClient().GetItemsAsync<Models.Generated.Team>();
+
+                foreach (var item in data.Items)
+                {
+                    _allTeams.Add(MapTeam(item));
+                }
             }
-            return teams;
+            return _allTeams;
         }
 
         public async Task<Team> GetTeamByCodeNameAsync(string TeamCodeName)
@@ -41,6 +47,11 @@ namespace RowlingApp.Services
             var data = await _deliveryService.GetDeliveryClient().GetItemAsync<Models.Generated.Team>(TeamCodeName);
 
             return MapTeam(data.Item);
+        }
+
+        public Team GetTeamByCodeName(string TeamCodeName)
+        {
+            return _allTeams.Find(t => t.CodeName == TeamCodeName);         
         }
 
         public async Task<bool> UpdateTeamAsync(Team TeamToUpdate)
@@ -70,6 +81,11 @@ namespace RowlingApp.Services
 
                 //Publish the version of the content item in Kontent
                 success = await _managementBetaService.PublishContentItem(TeamToUpdate.CodeName);
+
+                //Update the local memory object
+                var localTeam = _allTeams.Find(t => t.CodeName == TeamToUpdate.CodeName);
+                localTeam.TeamScore = (int)updateModel.TeamScore;
+                localTeam.TeamFramesLeft = (int)updateModel.TeamFramesleft;
             }
             catch (Exception ex)
             {
@@ -95,6 +111,9 @@ namespace RowlingApp.Services
                 CodeName = TeamToMap.System.Codename
             };
         }
+
+
+        private void NotifyDataChanged() => OnChange?.Invoke();
     }
 
 }
