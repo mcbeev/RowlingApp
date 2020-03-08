@@ -33,6 +33,7 @@ namespace RowlingApp.Services
                 _allTeams = new List<Team>();
 
                 var data = await _deliveryService.GetDeliveryClient().GetItemsAsync<Models.Generated.Team>();
+                Console.WriteLine($"~~Calling Delivery API Get All Teams~~ {DateTime.Now.ToString()}");
 
                 foreach (var item in data.Items)
                 {
@@ -96,6 +97,11 @@ namespace RowlingApp.Services
             return success;
         }
 
+        public void ClearLocalCache()
+        {
+            _allTeams = null;
+        }
+
         private Team MapTeam(Models.Generated.Team TeamToMap)
         {
             return new Team()
@@ -111,7 +117,6 @@ namespace RowlingApp.Services
                 CodeName = TeamToMap.System.Codename
             };
         }
-
 
         private void NotifyDataChanged() => OnChange?.Invoke();
     }

@@ -6,13 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.FeatureManagement;
+using RowlingApp.Features;
 
 namespace RowlingApp.Pages
 {
     public partial class Index : ComponentBase
     {
-        private List<Team> Teams;
         protected string jumboDisplay { get; set; }
+
+        protected string featureDisplay { get; set; }
 
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -20,13 +23,27 @@ namespace RowlingApp.Pages
         [Inject]
         private TeamService TeamService { get; set; }
 
+        [Inject]
+        private IFeatureManager FeatureManager { get; set; }
+
+        private List<Team> Teams;
+
+        private Timer ReloadTimer;
+
         protected override async Task OnInitializedAsync()
         {
             TeamService.OnChange += StateHasChanged;
 
             Teams = await TeamService.GetAllTeamsAsync();
 
-            StartAutoRefresh();
+            if (await FeatureManager.IsEnabledAsync(nameof(FeatureFlags.LiveReload)))
+            {
+                StartLiveReload();
+            }
+            else
+            {
+                StopLiveReload();
+            }
         }
 
         protected void RemoveJumbo()
@@ -34,23 +51,48 @@ namespace RowlingApp.Pages
             jumboDisplay = "none";
         }
 
-        private void StartAutoRefresh()
+        private void StartLiveReload()
         {
-            /* We are passing the "TimerCallback" delegate as first parameter which points our Callback function.
-             * The second parameter is null as we do not want to track any object state. 
-             * We are passing 1000 as third parameter which tells the Timer to wait for one second after its creation. This third parameter == “Delay Time”. 
-             * Finally, we are passing 1000 as fourth parameter which sets the regular interval for invoking the Callback function. 
-             * Pass 1000 as parameter the Callback function gets called for every single second.
+            /* First param: the "TimerCallback" delegate which points our callback function.
+             * Second param: null as we do not want to track any object state. 
+             * Third param: Delay time: We are passing 1000 as third parameter which tells the Timer to wait for one second after its creation. 
+             * Fourth param: we are passing 1000 which sets the regular interval for invoking the callback function. 
              * */
-
-            var timer = new Timer(new TimerCallback(_ =>
+            ReloadTimer = new Timer(new TimerCallback(_ =>
                 {
-                    InvokeAsync(() =>
+                    InvokeAsync(async () =>
                     {
-                        StateHasChanged();
+                        if (await FeatureManager.IsEnabledAsync(nameof(FeatureFlags.LiveReload)))
+                        {
+                            System.Console.WriteLine($"State Has Changed {System.DateTime.Now}");
+                            if((System.DateTime.Now.Second == 0) || (System.DateTime.Now.Second == 30))
+                            {
+                                TeamService.ClearLocalCache();
+                                Teams = await TeamService.GetAllTeamsAsync();
+                            }
+                            
+                            StateHasChanged();
+                        }
+                        else
+                        {
+                            //We need to stop the running timer
+                            ReloadTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                        }
                     });
                 }
             ), null, 1000, 1000);
+        }
+
+        private void StopLiveReload()
+        {
+            featureDisplay = "none";
+
+            if (ReloadTimer == null)
+                return;
+
+            //We need to stop the running timer
+            ReloadTimer.Change(Timeout.Infinite, Timeout.Infinite);
+
         }
     }
 }

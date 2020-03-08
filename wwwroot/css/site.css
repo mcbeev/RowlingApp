@@ -389,6 +389,11 @@ app {
   font-size: 45px;
 }
 
+.lrl {
+  padding: 5px 15px;
+  font-size: 20px;
+}
+
 .jumbotron {
   background-color: #c7d2d8;
   padding: 24px;

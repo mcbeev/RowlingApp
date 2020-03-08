@@ -19,10 +19,34 @@ namespace RowlingApp
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
+            //Default implementation for Blazor server for CreateDefaultBuilder
+            //Host.CreateDefaultBuilder(args)
+            //    .ConfigureWebHostDefaults(webBuilder =>
+            //    {
+            //        webBuilder.UseStartup<Startup>();
+            //    });
+
+            //Adding in Azure App Configuration and Feature Flags to our Builder
+            //ensure your app.
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+               .ConfigureWebHostDefaults(webBuilder =>
+                webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
+                   var settings = config.Build();
+                   config.AddAzureAppConfiguration(options => {
+                       options.Connect(settings["ConnectionStrings:AppConfig"])
+                              .UseFeatureFlags(); //with default options (caches every 30 seconds)
+                   });
+
+
+                })
+                .UseStartup<Startup>());
+
+
+            //  .UseFeatureFlags(opt => {
+            //      opt.CacheExpirationTime = TimeSpan.FromSeconds(5); // Set cache expiry to 5 seconds
+            //  });
+
+
+        }
     }
-}

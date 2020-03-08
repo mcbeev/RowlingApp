@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.FeatureManagement;
 using RowlingApp.Data;
 using RowlingApp.Models.Generated;
 using RowlingApp.Services;
@@ -25,6 +26,8 @@ namespace RowlingApp
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddFeatureManagement();
+            
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ITypeProvider, CustomTypeProvider>();
             services.AddHttpClient<KontentDeliveryService>();
@@ -49,7 +52,7 @@ namespace RowlingApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAzureAppConfiguration();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -57,6 +60,8 @@ namespace RowlingApp
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+
+            
         }
     }
 }
