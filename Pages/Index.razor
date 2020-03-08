@@ -1,5 +1,6 @@
 ﻿@page "/"
 
+
 <div class="leaderboard">
     <div class="jumbotron" style="display:@jumboDisplay">
         <h1>Rowling for the Steele's<button class='btn btn-link pull-right' @onclick="@RemoveJumbo">x</button></h1>
@@ -8,6 +9,7 @@
 
     <div>
         <h2>Leaderboard</h2>
+        <h3 class="lrl" style="display:@featureDisplay">Live Reload Enabled <span>@DateTime.Now.ToString()</span></h3>
         <ol>
             @if (Teams != null)
             {
