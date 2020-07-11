@@ -1,4 +1,5 @@
 using Kentico.Kontent.Delivery;
+using Kentico.Kontent.Delivery.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +31,9 @@ namespace RowlingApp
             
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ITypeProvider, CustomTypeProvider>();
-            services.AddHttpClient<KontentDeliveryService>();
+            services.AddHttpClient<IDeliveryHttpClient, DeliveryHttpClient>();
+            services.AddDeliveryClient("production", Configuration);
+            services.AddSingleton<KontentDeliveryService>();
             services.AddHttpClient<KontentManagementBetaService>();
             services.AddSingleton<KontentManagementService>();
             services.AddSingleton<TeamService>();

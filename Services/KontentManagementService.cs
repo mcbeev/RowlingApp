@@ -18,7 +18,6 @@ namespace RowlingApp.Services
         {
             if (_managementClient == null)
             {
-                //TODO: Change back projectid to: DeliveryOptions
                 ManagementOptions options = new ManagementOptions
                 {
                     ApiKey = _configuration.GetValue<string>("ManagementOptions:APIKey"),

@@ -33,12 +33,8 @@ namespace RowlingApp.Services
                 _allTeams = new List<Team>();
 
                 var data = await _deliveryService.GetDeliveryClient().GetItemsAsync<Models.Generated.Team>();
-                Console.WriteLine($"~~Calling Delivery API Get All Teams~~ {DateTime.Now.ToString()}");
-
-                foreach (var item in data.Items)
-                {
-                    _allTeams.Add(MapTeam(item));
-                }
+                
+                _allTeams.AddRange(data.Items.Select(item => MapTeam(item)));
             }
             return _allTeams;
         }
