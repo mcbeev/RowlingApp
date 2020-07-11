@@ -9,7 +9,7 @@
 
     <div>
         <h2>Leaderboard</h2>
-        <h3 class="lrl" style="display:@featureDisplay">Live Reload Enabled <span>@DateTime.Now.ToString()</span></h3>
+        <h3 class="lrl" style="display:@featureDisplay">Live Reload Enabled <span>@DateTime.Now.ToString("g")</span></h3>
         <ol>
             @if (Teams != null)
             {
