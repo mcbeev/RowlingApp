@@ -55,6 +55,7 @@ namespace RowlingApp.Pages
 
         public void Dispose()
         {
+            Teams = null;
             StopLiveReload();
         }
 
