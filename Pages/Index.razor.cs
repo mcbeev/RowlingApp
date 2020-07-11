@@ -8,10 +8,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.FeatureManagement;
 using RowlingApp.Features;
+using System;
 
 namespace RowlingApp.Pages
 {
-    public partial class Index : ComponentBase
+    public partial class Index : ComponentBase, IDisposable
     {
         protected string jumboDisplay { get; set; }
 
@@ -35,15 +36,26 @@ namespace RowlingApp.Pages
             TeamService.OnChange += StateHasChanged;
 
             Teams = await TeamService.GetAllTeamsAsync();
+        }
 
-            if (await FeatureManager.IsEnabledAsync(nameof(FeatureFlags.LiveReload)))
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
             {
-                StartLiveReload();
+                if (await FeatureManager.IsEnabledAsync(nameof(FeatureFlags.LiveReload)))
+                {
+                    StartLiveReload();
+                }
+                else
+                {
+                    StopLiveReload();
+                }
             }
-            else
-            {
-                StopLiveReload();
-            }
+        }
+
+        public void Dispose()
+        {
+            StopLiveReload();
         }
 
         protected void RemoveJumbo()
@@ -64,7 +76,7 @@ namespace RowlingApp.Pages
                     {
                         if (await FeatureManager.IsEnabledAsync(nameof(FeatureFlags.LiveReload)))
                         {
-                            System.Console.WriteLine($"State Has Changed {System.DateTime.Now}");
+                            //System.Console.WriteLine($"State Has Changed {System.DateTime.Now}");
                             if((System.DateTime.Now.Second == 0) || (System.DateTime.Now.Second == 30))
                             {
                                 TeamService.ClearLocalCache();
@@ -81,6 +93,8 @@ namespace RowlingApp.Pages
                     });
                 }
             ), null, 1000, 1000);
+
+
         }
 
         private void StopLiveReload()
@@ -92,7 +106,6 @@ namespace RowlingApp.Pages
 
             //We need to stop the running timer
             ReloadTimer.Change(Timeout.Infinite, Timeout.Infinite);
-
         }
     }
 }

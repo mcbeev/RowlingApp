@@ -43,11 +43,11 @@
           "dependencies": {
             "Kentico.Kontent.Delivery": {
               "target": "Package",
-              "version": "[12.3.0, )"
+              "version": "[13.0.1, )"
             },
             "Kentico.Kontent.Management": {
               "target": "Package",
-              "version": "[2.0.2, )"
+              "version": "[2.1.0, )"
             },
             "Microsoft.AspNetCore.Blazor.HttpClient": {
               "target": "Package",
@@ -55,11 +55,11 @@
             },
             "Microsoft.Azure.AppConfiguration.AspNetCore": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.0.2, )"
             },
             "Microsoft.FeatureManagement.AspNetCore": {
               "target": "Package",
-              "version": "[2.0.0-preview-010610001-1263, )"
+              "version": "[2.0.0, )"
             }
           },
           "imports": [
@@ -73,10 +73,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.2, 3.1.2]"
-            },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
               "version": "[3.1.2, 3.1.2]"
