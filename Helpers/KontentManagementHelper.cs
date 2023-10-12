@@ -8,7 +8,7 @@ namespace RowlingApp.Helpers
 {
     public static class KontentManagementHelper
     {
-        public static LanguageVariantIdentifier GetIdentifiers(string ContentItemCodeName, string id)
+        public static LanguageVariantIdentifier GetIdentifiers(string id)
         {
             //Retrieive an ItemIdentifier by codename of the content item we want to create a new version of
             Reference itemIdentifier = Reference.ById(Guid.Parse(id));

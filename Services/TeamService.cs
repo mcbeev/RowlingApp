@@ -65,55 +65,35 @@ namespace RowlingApp.Services
         {
             bool success = false;
 
-            //Get a Kontent Management API client for v1 of the API
+            // Get a Kontent Management API client for v1 of the API
             ManagementClient client = _managementService.GetManagementClient();
 
-            //Create identifiers for working with our item
-            var identifier = KontentManagementHelper.GetIdentifiers(TeamToUpdate.CodeName, TeamToUpdate.Id);
+            // Create identifiers for working with our item
+            var identifier = KontentManagementHelper.GetIdentifiers(TeamToUpdate.Id);
 
-            //Specify fields we want to update in our content item
-            // Models.Generated.TeamForScore updateModel = new Models.Generated.TeamForScore()
-            // {
-            //     TeamScore = new Decimal(TeamToUpdate.TeamScore),
-            //     TeamFramesleft = new Decimal(TeamToUpdate.TeamFramesLeft)
-            // };
-
-
-            // var response = await client.GetLanguageVariantAsync<Models.Generated.Team>(identifier);
-            // // response.Elements.teamscore = 23;
-            // //response.Elements.Teamscore = new NumberElement() { Value = decimal.Parse("42.0") };
-            // // response.Elements.Teamname = new TextElement() { Value = "TEST 42 "};
-            // response.Elements.Teamscore = 42;
-
-
-            // Elements to update
+            // Specify fields we want to update in our content item
             var elements = ElementBuilder.GetElementsAsDynamic(new BaseElement[]
             {
-                new TextElement()
-                {
-                    // You can use `Reference.ByCodename` if you don't have the model
-                    //Element = Reference.ByCodename("teamname"),
-                    Element = Reference.ByCodename(Models.Generated.Team.TeamnameCodename),
-                    Value = "BizStream",
-                },
                 new NumberElement()
                 {
                     Element = Reference.ByCodename(Models.Generated.Team.TeamscoreCodename),
                     Value = TeamToUpdate.TeamScore,
+                },
+                new NumberElement()
+                {
+                    Element = Reference.ByCodename(Models.Generated.Team.TeamframesleftCodename),
+                    Value = TeamToUpdate.TeamFramesLeft,
                 }
+
             });
 
             var upsertModel = new LanguageVariantUpsertModel() { Elements = elements };
 
-            //var responseVariant = await client.UpsertLanguageVariantAsync(identifier, upsertModel);
-
             try
             {
                 //Create a new version of the content item in Kontent   
-                // success = await client.CreateContentItemNewVersion(TeamToUpdate.CodeName);
                 await client.CreateNewVersionOfLanguageVariantAsync(identifier);
                 //Commit the update to Kontent
-                //var responseVariant = await client.UpsertLanguageVariantAsync(identifier, response.Elements);
                 var responseVariant = await client.UpsertLanguageVariantAsync(identifier, upsertModel);
 
                 //Publish the version of the content item in Kontent

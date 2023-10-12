@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.FeatureManagement;
-using RowlingApp.Data;
 using RowlingApp.Models.Generated;
 using RowlingApp.Services;
 
@@ -20,7 +19,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddFeatureManagement();
 
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<ITypeProvider, CustomTypeProvider>();
 builder.Services.AddHttpClient<IDeliveryHttpClient, DeliveryHttpClient>();
 builder.Services.AddDeliveryClient(Configuration);
