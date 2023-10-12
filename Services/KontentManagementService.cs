@@ -1,4 +1,5 @@
-﻿using Kentico.Kontent.Management;
+﻿using Kontent.Ai.Management;
+using Kontent.Ai.Management.Configuration;
 using Microsoft.Extensions.Configuration;
 
 namespace RowlingApp.Services

@@ -2,10 +2,10 @@
 
 namespace RowlingApp.Services
 {
-    public interface IKontentManagementBetaService
-    {
-        Task<bool> CreateContentItemNewVersion(string ContentItemCodeName);
+    // public interface IKontentManagementBetaService
+    // {
+    //     Task<bool> CreateContentItemNewVersion(string ContentItemCodeName);
 
-        void PublishContentItem();
-    }
+    //     void PublishContentItem();
+    // }
 }
