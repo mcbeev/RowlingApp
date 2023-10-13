@@ -245,15 +245,18 @@ app {
   font-size: 25px;
 }
 
-.card-img { 
+.card-img {
   max-width: 400px;
   margin-bottom: 10px;
 }
 
 .card-img.placeholder {
-    max-width: 200px;
+  max-width: 200px;
 }
-
+.score-board-img {
+  max-width: 150px;
+  margin-left: 5;
+}
 #blazor-error-ui {
   background: lightyellow;
   bottom: 0;
@@ -314,14 +317,18 @@ app {
   padding: 10px;
   margin: 0 15px;
 }
-
 .leaderboard ol li h3 {
   font-size: 30px;
   margin: 0;
   display: flex;
   align-items: center;
 }
-
+.leaderboard a.team-wrapper {
+  display: flex;
+  .sub-content {
+    margin-left: 25px;
+  }
+}
 .leaderboard ol li h3:before {
   content: counter(counter);
   font-weight: bold;
@@ -448,8 +455,9 @@ app {
     z-index: 2;
   }
 
-  .navbar-toggler, .sidebar .navbar-dark {
-    display: none ;
+  .navbar-toggler,
+  .sidebar .navbar-dark {
+    display: none;
   }
 
   .sidebar .collapse {

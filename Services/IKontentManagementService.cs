@@ -1,4 +1,4 @@
-﻿using Kentico.Kontent.Management;
+﻿using Kontent.Ai.Management;
 
 namespace RowlingApp.Services
 {

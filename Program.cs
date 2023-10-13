@@ -1,63 +1,53 @@
+using Kontent.Ai.Delivery;
+using Kontent.Ai.Delivery.Abstractions;
+using Kontent.Ai.Delivery.Extensions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
+using Microsoft.FeatureManagement;
+using RowlingApp.Models.Generated;
+using RowlingApp.Services;
 
-namespace RowlingApp
+var builder = WebApplication.CreateBuilder(args);
+
+// Application services and configuration setup
+var Configuration = builder.Configuration;
+
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
+builder.Services.AddFeatureManagement();
+
+builder.Services.AddSingleton<ITypeProvider, CustomTypeProvider>();
+builder.Services.AddHttpClient<IDeliveryHttpClient, DeliveryHttpClient>();
+builder.Services.AddDeliveryClient(Configuration);
+//builder.Services.AddHttpClient<KontentManagementBetaService>();
+builder.Services.AddSingleton<KontentManagementService>();
+builder.Services.AddSingleton<TeamService>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-         /* 1. Default out of the box implementation for Blazor server for CreateDefaultBuilder
-          */
-         //Host.CreateDefaultBuilder(args)
-         //    .ConfigureWebHostDefaults(webBuilder =>
-         //    {
-         //        webBuilder.UseStartup<Startup>();
-         //    });
-
-
-         /* 2. Adding in Azure App Configuration and Feature Flags to our Builder
-          *     ensure your app. Uses default options (caches every 30 seconds)
-          *     Make sure you have ConnectionStrings:AppConfig in your user's secrets.json and in Azure App Service AppSettings 
-          */
-         //Host.CreateDefaultBuilder(args)
-         //   .ConfigureWebHostDefaults(webBuilder =>
-         //    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
-         //    {
-         //       var settings = config.Build();
-         //       config.AddAzureAppConfiguration(options => {
-         //           options.Connect(settings["ConnectionStrings:AppConfig"])
-         //                  .UseFeatureFlags();
-         //       });
-         //    })
-         //    .UseStartup<Startup>());
-
-
-         /* 3. Same as above but with label filter and custom cache expiration time (set to every 15 seconds).
-          *     The label must matche the running environment's environment variable 
-          *     (same as env.IsDevelopment() or env.IsProduction())
-          */
-         Host.CreateDefaultBuilder(args)
-               .ConfigureWebHostDefaults(webBuilder =>
-                webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    var settings = config.Build();
-                    config.AddAzureAppConfiguration(options =>
-                    {
-                        options.Connect(settings["ConnectionStrings:AppConfig"])
-                            .UseFeatureFlags(opt => {
-                                opt.CacheExpirationTime = TimeSpan.FromSeconds(15); 
-                                opt.Label = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")?.ToLowerInvariant();
-                            }); 
-                    });
-                })
-                .UseStartup<Startup>());
-
-    }
+    app.UseDeveloperExceptionPage();
 }
+else
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseAzureAppConfiguration();
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapBlazorHub();
+    endpoints.MapFallbackToPage("/_Host");
+});
+
+app.Run();

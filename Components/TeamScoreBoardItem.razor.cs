@@ -9,7 +9,7 @@ namespace RowlingApp.Components
     public partial class TeamScoreBoardItem : ComponentBase
     {
         [Parameter]
-        public string TeamClodeName { get; set; }
+        public string TeamCodeName { get; set; }
 
         [Parameter]
         public Team Team { get; set; }
@@ -23,7 +23,7 @@ namespace RowlingApp.Components
 
             if (Team == null)
             {
-                Team = await TeamService.GetTeamByCodeNameAsync(TeamClodeName);
+                Team = await TeamService.GetTeamByCodeNameAsync(TeamCodeName);
             }
         }
     }

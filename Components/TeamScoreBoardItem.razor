@@ -6,13 +6,39 @@ else
 {
     <li>
         <div class="inner-content">
-            <a href="/teams/@Team.CodeName">
-                <h3>@Team.TeamName</h3>
+            <a class="team-wrapper" href="/teams/@Team.CodeName">
+                <img class="score-board-img" src="@Team.TeamLogo" alt="@Team.TeamName logo">
                 <div class="sub-content">
-                    <p>Score: @Team.TeamScore</p>
-                    @Team.TeamFramesLeft frames left
+                    <h3>@Team.TeamName</h3>
+                    @* @{
+                        while(true){
+                        System.Threading.Thread.Sleep(5000);
+                            Team = teamService.GetTeamByCodeName(Team.CodeName);
+                        }
+
+                    } *@
+                    <div>
+                        <p>Score: @Team.TeamScore</p>
+                        @Team.TeamFramesLeft frames left
+                    </div>
                 </div>
             </a>
         </div>
     </li>
+}
+@code {
+    private bool _firstRender = true;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        await Task.Delay(5000);
+        ExecuteMethod();
+        StateHasChanged(); // Request the component to re-render
+    }
+
+    private void ExecuteMethod()
+    {
+        Team = TeamService.GetTeamByCodeName(Team.CodeName);
+    }
 }
