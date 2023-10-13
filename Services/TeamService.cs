@@ -39,8 +39,6 @@ namespace RowlingApp.Services
                 _allTeams = new List<Team>();
 
                 var data = await _deliveryClient.GetItemsAsync<Models.Generated.Team>(
-                    new LimitParameter(3),
-                    new DepthParameter(0),
                     new OrderParameter("elements.teamname")
                 );
                 
