@@ -1,0 +1,57 @@
+<publishData
+  ><publishProfile
+    profileName="rowling - Web Deploy"
+    publishMethod="MSDeploy"
+    publishUrl="rowling.scm.azurewebsites.net:443"
+    msdeploySite="rowling"
+    userName="$rowling"
+    userPWD="R7gMNhnlws11WjwZvarhybmDHXSzLAGP0a0mMkR8QGqLG7TN1hEwB18JaqZh"
+    destinationAppUrl="http://rowling.azurewebsites.net"
+    SQLServerDBConnectionString=""
+    mySQLDBConnectionString=""
+    hostingProviderForumLink=""
+    controlPanelLink="http://windows.azure.com"
+    webSystem="WebSites"
+    ><databases /></publishProfile
+  ><publishProfile
+    profileName="rowling - FTP"
+    publishMethod="FTP"
+    publishUrl="ftp://waws-prod-bn1-057.ftp.azurewebsites.windows.net/site/wwwroot"
+    ftpPassiveMode="True"
+    userName="rowling\$rowling"
+    userPWD="R7gMNhnlws11WjwZvarhybmDHXSzLAGP0a0mMkR8QGqLG7TN1hEwB18JaqZh"
+    destinationAppUrl="http://rowling.azurewebsites.net"
+    SQLServerDBConnectionString=""
+    mySQLDBConnectionString=""
+    hostingProviderForumLink=""
+    controlPanelLink="http://windows.azure.com"
+    webSystem="WebSites"
+    ><databases /></publishProfile
+  ><publishProfile
+    profileName="rowling - Zip Deploy"
+    publishMethod="ZipDeploy"
+    publishUrl="rowling.scm.azurewebsites.net:443"
+    userName="$rowling"
+    userPWD="R7gMNhnlws11WjwZvarhybmDHXSzLAGP0a0mMkR8QGqLG7TN1hEwB18JaqZh"
+    destinationAppUrl="http://rowling.azurewebsites.net"
+    SQLServerDBConnectionString=""
+    mySQLDBConnectionString=""
+    hostingProviderForumLink=""
+    controlPanelLink="http://windows.azure.com"
+    webSystem="WebSites"
+    ><databases /></publishProfile
+  ><publishProfile
+    profileName="rowling - ReadOnly - FTP"
+    publishMethod="FTP"
+    publishUrl="ftp://waws-prod-bn1-057dr.ftp.azurewebsites.windows.net/site/wwwroot"
+    ftpPassiveMode="True"
+    userName="rowling\$rowling"
+    userPWD="R7gMNhnlws11WjwZvarhybmDHXSzLAGP0a0mMkR8QGqLG7TN1hEwB18JaqZh"
+    destinationAppUrl="http://rowling.azurewebsites.net"
+    SQLServerDBConnectionString=""
+    mySQLDBConnectionString=""
+    hostingProviderForumLink=""
+    controlPanelLink="http://windows.azure.com"
+    webSystem="WebSites"
+    ><databases /></publishProfile
+></publishData>

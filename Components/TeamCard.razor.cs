@@ -55,7 +55,25 @@ namespace RowlingApp.Components
             //Re-enable the button
             IsDisabled = false;
             StateHasChanged();
-    }
+        }
+        private async void DecrementScore()
+        {
+            //Disable the button action to prevent button spamming
+            IsDisabled = true;
+            StateHasChanged();
+
+            //Increment team score
+            if(Team.TeamScore > 0){
+                Team.TeamScore--;
+            }
+
+            //Save state
+            await TeamService.UpdateTeamAsync(Team);
+
+            //Re-enable the button
+            IsDisabled = false;
+            StateHasChanged();
+        }
 
         private async Task IncrementFrames()
         {
@@ -66,6 +84,22 @@ namespace RowlingApp.Components
             if (Team.TeamFramesLeft < 0)
             {
                 Team.TeamFramesLeft = 0;
+            }
+
+            await TeamService.UpdateTeamAsync(Team);
+
+            IsDisabled = false;
+            StateHasChanged();
+        }
+        private async Task DecrementFrames()
+        {
+            IsDisabled = true;
+            StateHasChanged();
+
+            Team.TeamFramesLeft++;
+            if (Team.TeamFramesLeft > 10)
+            {
+                Team.TeamFramesLeft = 10;
             }
 
             await TeamService.UpdateTeamAsync(Team);
