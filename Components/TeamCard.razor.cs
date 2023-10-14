@@ -58,6 +58,9 @@ namespace RowlingApp.Components
         }
         private async void DecrementScore()
         {
+            var confirmed = await JSRuntime.InvokeAsync<bool>("confirm", new object[] { "Are you sure you want to DECREASE your SCORE?" });
+            if (!confirmed) return;
+
             //Disable the button action to prevent button spamming
             IsDisabled = true;
             StateHasChanged();
@@ -93,13 +96,16 @@ namespace RowlingApp.Components
         }
         private async Task DecrementFrames()
         {
+            var confirmed = await JSRuntime.InvokeAsync<bool>("confirm", new object[] { "Are you sure you want to GO BACK a frame?" });
+            if (!confirmed) return;
+
             IsDisabled = true;
             StateHasChanged();
 
             Team.TeamFramesLeft++;
-            if (Team.TeamFramesLeft > 10)
+            if (Team.TeamFramesLeft > RowlingApp.Constants.RowlingAppConstants.DefaultFramesLeft)
             {
-                Team.TeamFramesLeft = 10;
+                Team.TeamFramesLeft = RowlingApp.Constants.RowlingAppConstants.DefaultFramesLeft;
             }
 
             await TeamService.UpdateTeamAsync(Team);
@@ -110,6 +116,9 @@ namespace RowlingApp.Components
 
         private async void ResetTeam()
         {
+            var confirmed = await JSRuntime.InvokeAsync<bool>("confirm", new object[] { "RESET will set your SCORE to ZERO and will put you back to the FIRST FRAME.\n\nAre you sure your RESET? " });
+            if (!confirmed) return;
+
             IsDisabled = true;
             StateHasChanged();
 
