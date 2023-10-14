@@ -10,7 +10,6 @@ body {
 a,
 .btn-link {
   color: #40525b;
-  margin-top: 20px;
 }
 
 a:hover,
@@ -34,6 +33,10 @@ a:hover,
   color: #fff;
   background-color: #000;
   border-color: transparent;
+}
+
+.btn-go-back {
+  margin-top: 20px;
 }
 
 
@@ -277,7 +280,7 @@ app {
   max-width: 200px;
 }
 .score-board-img {
-  max-width: 150px;
+  max-width: 200px;
   margin-left: 5;
 }
 #blazor-error-ui {
