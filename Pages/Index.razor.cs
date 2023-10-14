@@ -27,15 +27,11 @@ namespace RowlingApp.Pages
         [Inject]
         private IFeatureManager FeatureManager { get; set; }
 
-        private List<Team> Teams;
-
         private Timer ReloadTimer;
 
         protected override async Task OnInitializedAsync()
         {
             TeamService.OnChange += StateHasChanged;
-
-            Teams = await TeamService.GetAllTeamsAsync();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -55,7 +51,6 @@ namespace RowlingApp.Pages
 
         public void Dispose()
         {
-            Teams = null;
             StopLiveReload();
         }
 
@@ -81,7 +76,6 @@ namespace RowlingApp.Pages
                             if((System.DateTime.Now.Second == 0) || (System.DateTime.Now.Second == 30))
                             {
                                 TeamService.ClearLocalCache();
-                                Teams = await TeamService.GetAllTeamsAsync();
                             }
                             
                             StateHasChanged();
