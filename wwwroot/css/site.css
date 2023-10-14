@@ -35,6 +35,10 @@ a:hover,
   border-color: transparent;
 }
 
+.btn-go-back {
+  margin-top: 20px;
+}
+
 
 .dim {
   opacity: 0.5;
@@ -276,7 +280,7 @@ app {
   max-width: 200px;
 }
 .score-board-img {
-  max-width: 150px;
+  max-width: 200px;
   margin-left: 5;
 }
 #blazor-error-ui {
