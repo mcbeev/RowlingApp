@@ -29,6 +29,17 @@ a:hover,
   border-color: transparent;
 }
 
+.btn-reset {
+  color: #fff;
+  background-color: #000;
+  border-color: transparent;
+}
+
+
+.dim {
+  opacity: 0.5;
+}
+
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -213,7 +224,15 @@ app {
 .team-item .cta {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+}
+
+.team-item .cta.col {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .team-item .cta button {
@@ -223,6 +242,9 @@ app {
   font-size: 22px;
   align-items: center;
   justify-content: center;
+}
+.team-item .cta.col button {
+  width: 50%;
 }
 
 @media (min-width: 768px) {

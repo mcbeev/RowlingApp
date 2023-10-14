@@ -15,12 +15,16 @@ else
                 
                 <h3 class="card-title">Current Score: @Team.TeamScore</h3>
                 <span class="team-current-frames-left">Frames left: @Team.TeamFramesLeft</span>
-            <div class="cta">   
-                <button class="btn btn-primary" role="button" @onclick="@(() => IncrementScore())" disabled="@IsDisabled"><span class="oi oi-plus"></span>  Add to Current Score</button>
-                <button class="btn btn-primary" role="button" @onclick="@(() => DecrementScore())" disabled="@IsDisabled"><span class="oi oi-minus"></span>  Remove From Current Score</button>
-                <button class="btn btn-secondary" role="button" @onclick="@(() => IncrementFrames())" disabled="@IsDisabled"><span class="oi oi-arrow-circle-right"></span>  Go to Next Frame</button>
-                <button class="btn btn-secondary" role="button" @onclick="@(() => DecrementFrames())" disabled="@IsDisabled"><span class="oi oi-arrow-circle-left"></span>  Go to Previous Frame</button>
-                <button class="btn btn-link" role="button" @onclick="@(() => ResetTeam())" disabled="@IsDisabled"><span class="oi oi-power-standby"></span>  Reset</button>
+            <div class="cta col">
+                <button class="btn btn-primary dim" role="button" @onclick="@(() => DecrementScore())" disabled="@IsDisabled"><span class="oi oi-minus"></span> Point</button>
+                <button class="btn btn-primary" role="button" @onclick="@(() => IncrementScore())" disabled="@IsDisabled"><span class="oi oi-plus"></span> Point</button>
+            </div>
+            <div class="cta col">
+                <button class="btn btn-secondary dim" role="button" @onclick="@(() => DecrementFrames())" disabled="@IsDisabled"><span class="oi oi-arrow-circle-left"></span> Frame</button>
+                <button class="btn btn-secondary" role="button" @onclick="@(() => IncrementFrames())" disabled="@IsDisabled"><span class="oi oi-arrow-circle-right"></span> Frame</button>
+            </div>
+            <div class="cta">
+                <button class="btn btn-reset dim" role="button" @onclick="@(() => ResetTeam())" disabled="@IsDisabled"><span class="oi oi-power-standby"></span> Reset</button>
                 <a href="">Back to Leaderboard</a>
             </div>
             } 
