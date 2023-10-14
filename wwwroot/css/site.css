@@ -10,6 +10,7 @@ body {
 a,
 .btn-link {
   color: #40525b;
+  margin-top: 20px;
 }
 
 a:hover,
