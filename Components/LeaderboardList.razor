@@ -1,0 +1,27 @@
+@if (Teams == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ol>
+        @if (Teams != null)
+        {
+            @foreach (var team in Teams.OrderBy(x => x.TeamScore).ThenBy(y => y.TeamFramesLeft))
+            {
+                <TeamScoreBoardItem Team="@team" />
+            }
+        }
+    </ol>
+}
+@code {
+    private bool _firstRender = true;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        await Task.Delay(5000);
+        Teams = await TeamService.GetAllTeamsAsync();
+        StateHasChanged(); // Request the component to re-render
+    }
+}

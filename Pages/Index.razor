@@ -8,14 +8,6 @@
     <div>
         <h2>Leaderboard</h2>
         <h3 class="lrl" style="display:@featureDisplay">Live Reload Enabled <span>@DateTime.Now.ToString("g")</span></h3>
-        <ol>
-            @if (Teams != null)
-            {
-                @foreach (var team in Teams.OrderBy(x => x.TeamScore).ThenBy(y => y.TeamFramesLeft))
-                {
-                    <TeamScoreBoardItem Team="@team" />
-                }
-            }
-        </ol>
+        <LeaderboardList />
     </div>
 </div>
