@@ -7,7 +7,7 @@ else
     <ol>
         @if (Teams != null)
         {
-            @foreach (var team in Teams.OrderBy(x => x.TeamScore).ThenBy(y => y.TeamFramesLeft))
+            @foreach (var team in Teams.OrderByDescending(x => x.TeamScore).ThenBy(y => y.TeamFramesLeft))
             {
                 <TeamScoreBoardItem Team="@team" />
             }
