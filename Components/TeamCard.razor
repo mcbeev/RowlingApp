@@ -14,7 +14,7 @@ else
             {
                 
                 <h3 class="card-title">Current Score: @Team.TeamScore</h3>
-                <span class="team-current-frames-left">Frames: @(10-Team.TeamFramesLeft) completed  (@Team.TeamFramesLeft left)</span>
+                <!-- <span class="team-current-frames-left">Frames: @(10-Team.TeamFramesLeft) completed  (@Team.TeamFramesLeft left)</span> -->
             <div class="cta col">
                 <button class="btn btn-primary dim" role="button" @onclick="@(() => DecrementScore())" disabled="@IsDisabled"><span class="oi oi-minus"></span> Point</button>
                 <button class="btn btn-primary" role="button" @onclick="@(() => IncrementScore())" disabled="@IsDisabled"><span class="oi oi-plus"></span> Point</button>
